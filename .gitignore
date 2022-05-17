@@ -1,0 +1,9 @@
+Engine/build/*
+Engine/install/*
+App/build/*
+App/bin/*
+build/*
+third_party/*
+!third_party/CMakeFiles.txt
+!third_party/imgui/CMakeFiles.txt
+!third_party/imgui/potato_imgui/*
