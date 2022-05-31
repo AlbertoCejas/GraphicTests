@@ -57,14 +57,26 @@ endif()
 # file(GLOB_RECURSE PROJECT_SOURCES source/*.c source/*.cpp)
 
 set(PROJECT_HEADERS 
-    include/${PROJECT_NAME}/Core/VkFactory.h
     include/${PROJECT_NAME}/Core/Types.h
+
+    include/${PROJECT_NAME}/Core/interface/VKIFactory.h
+    include/${PROJECT_NAME}/Core/interface/VKIRenderDevice.h
+    include/${PROJECT_NAME}/Core/interface/VKIRenderContext.h
+    include/${PROJECT_NAME}/Core/interface/VKISwapChain.h
+
+    include/${PROJECT_NAME}/Core/include/VKFactory.h
+    include/${PROJECT_NAME}/Core/include/VKRenderDevice.h
+    include/${PROJECT_NAME}/Core/include/VKRenderContext.h
+    include/${PROJECT_NAME}/Core/include/VKSwapChain.h
 )
 
 set(PROJECT_SOURCES 
     source/VKRendererPlugin.cpp
 
     source/Core/VKFactory.cpp
+    source/Core/VKRenderDevice.cpp
+    source/Core/VKRenderContext.cpp
+    source/Core/VKSwapChain.cpp
 )
 
 # if(PLATFORM_WIN32)

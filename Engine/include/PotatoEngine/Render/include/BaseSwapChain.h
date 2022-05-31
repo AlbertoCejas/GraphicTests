@@ -3,10 +3,10 @@
 namespace potato
 {
 	template <class BaseInterface>
-	class BaseGPUDriverFactory : public BaseInterface
+	class BaseSwapChain : public BaseInterface
 	{
 		public:
 
-			// Nothing for now
+			virtual ~BaseSwapChain() override {}
 	};
 }

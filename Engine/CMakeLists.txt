@@ -78,7 +78,17 @@ set(PROJECT_HEADERS
     include/${PROJECT_NAME}/Util/Macros.h
 
     include/${PROJECT_NAME}/Render/interface/IGPUDriverFactory.h
+    include/${PROJECT_NAME}/Render/interface/IRenderDevice.h
+    include/${PROJECT_NAME}/Render/interface/IRenderContext.h
+    include/${PROJECT_NAME}/Render/interface/ISwapChain.h
+
     include/${PROJECT_NAME}/Render/include/BaseGPUDriverFactory.h
+    include/${PROJECT_NAME}/Render/include/BaseRenderDevice.h
+    include/${PROJECT_NAME}/Render/include/BaseRenderDeviceLegacy.h
+    include/${PROJECT_NAME}/Render/include/BaseRenderContext.h
+    include/${PROJECT_NAME}/Render/include/BaseRenderContextLegacy.h
+    include/${PROJECT_NAME}/Render/include/BaseSwapChain.h
+    include/${PROJECT_NAME}/Render/include/GraphicsTypes.h
 )
 
 set(PROJECT_SOURCES 

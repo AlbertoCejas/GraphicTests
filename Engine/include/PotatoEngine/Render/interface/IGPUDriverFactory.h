@@ -6,6 +6,6 @@ namespace potato
 	{
 		public:
 
-			// Nothing for now
+			virtual ~IGPUDriverFactory() {}
 	};
 }

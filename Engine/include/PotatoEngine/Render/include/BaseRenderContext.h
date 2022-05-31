@@ -3,7 +3,7 @@
 namespace potato
 {
 	template <class BaseInterface>
-	class BaseGPUDriverFactory : public BaseInterface
+	class BaseRenderContext : public BaseInterface
 	{
 		public:
 

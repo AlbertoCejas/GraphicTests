@@ -4,6 +4,7 @@ struct GLFWwindow;
 
 namespace potato
 {
+	using NativeWindow = GLFWwindow;
 
 	class Window
 	{
@@ -15,6 +16,8 @@ namespace potato
 
 			int getWidth() const;
 			int getHeight() const;
+
+			NativeWindow* getNativeWindow() const { return m_window; }
 
 		private:
 
