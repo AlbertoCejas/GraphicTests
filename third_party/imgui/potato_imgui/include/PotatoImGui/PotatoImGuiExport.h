@@ -1,0 +1,42 @@
+
+#ifndef POTATOIMGUI_EXPORT_H
+#define POTATOIMGUI_EXPORT_H
+
+#ifdef POTATOIMGUI_STATIC
+#  define POTATOIMGUI_EXPORT
+#  define POTATOIMGUI_NO_EXPORT
+#else
+#  ifndef POTATOIMGUI_EXPORT
+#    ifdef PotatoImGui_EXPORTS
+        /* We are building this library */
+#      define POTATOIMGUI_EXPORT 
+#    else
+        /* We are using this library */
+#      define POTATOIMGUI_EXPORT 
+#    endif
+#  endif
+
+#  ifndef POTATOIMGUI_NO_EXPORT
+#    define POTATOIMGUI_NO_EXPORT 
+#  endif
+#endif
+
+#ifndef POTATOIMGUI_DEPRECATED
+#  define POTATOIMGUI_DEPRECATED __declspec(deprecated)
+#endif
+
+#ifndef POTATOIMGUI_DEPRECATED_EXPORT
+#  define POTATOIMGUI_DEPRECATED_EXPORT POTATOIMGUI_EXPORT POTATOIMGUI_DEPRECATED
+#endif
+
+#ifndef POTATOIMGUI_DEPRECATED_NO_EXPORT
+#  define POTATOIMGUI_DEPRECATED_NO_EXPORT POTATOIMGUI_NO_EXPORT POTATOIMGUI_DEPRECATED
+#endif
+
+#if 0 /* DEFINE_NO_DEPRECATED */
+#  ifndef POTATOIMGUI_NO_DEPRECATED
+#    define POTATOIMGUI_NO_DEPRECATED
+#  endif
+#endif
+
+#endif /* POTATOIMGUI_EXPORT_H */
