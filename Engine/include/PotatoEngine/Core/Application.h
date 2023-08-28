@@ -8,6 +8,8 @@
 
 namespace potato
 {
+	constexpr const char* const CONFIG_FILE_NAME = "application.config";
+
 	class POTATOENGINE_EXPORT Application
 	{
 	public:
@@ -15,7 +17,7 @@ namespace potato
 		explicit Application(const char* name);
 		virtual ~Application() = default;
 
-		void init(const char* configFilePath = "application.config");
+		void init(const char* configFilePath = CONFIG_FILE_NAME);
 		void update();
 		virtual void shutdown();
 

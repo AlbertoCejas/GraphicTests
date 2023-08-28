@@ -3,15 +3,18 @@
 #include <Core/interface/VKISwapChain.h>
 #include <PotatoEngine/Render/include/BaseSwapChain.h>
 #include <vulkan/vulkan_core.h>
+#include <vector>
 
-class Window;
 
 namespace potato
 {
+	class Window;
+
 	namespace vk
 	{
-		class VKDeviceContext;
+		class VKInstance;
 		class VKRenderDevice;
+		class VKRenderContext;
 
 		class VKSwapChain final : public BaseSwapChain<VKISwapChain>
 		{
@@ -19,20 +22,21 @@ namespace potato
 
 				using Base = BaseSwapChain<VKISwapChain>;
 
-				VKSwapChain(VKRenderDevice& renderDevice, Window& window);
+				VKSwapChain(VKRenderDevice& renderDevice, VKRenderContext& context, const SwapChainDesc& swapChainDesc, Window& window);
 				~VKSwapChain() override;
 
 			private:
 
 				void createSurface();
-				void createVKSwapchain();
-				void initBuffersAndViews();
-				VkResult acquireNextImage(VKDeviceContext& deviceContext);
+				void createVulkanSwapChain();
 
-				VkInstance m_instance = VK_NULL_HANDLE;
+				VKInstance* m_VKInstance = nullptr;
 				VkSurfaceKHR m_surface = VK_NULL_HANDLE;
-
-				Window* m_window;
+				VkSwapchainKHR m_VKSwapChain = VK_NULL_HANDLE;
+				std::vector<VkImage> m_swapChainImages;
+				VkFormat m_swapChainImageFormat;
+				std::vector<VkImageView> m_swapChainImageViews;
+				Window* m_window = nullptr;
 		};
 	}
 }

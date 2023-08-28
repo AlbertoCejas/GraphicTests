@@ -36,7 +36,7 @@ option(BUILD_TESTS "Build tests." OFF)
 
 set(PROJECT_HEADERS 
     include/${PROJECT_NAME}/PotatoApp.h
-    include/${PROJECT_NAME}/VkApp.h
+    include/${PROJECT_NAME}/PotatoAppSample.h
 
     include/${PROJECT_NAME}/Editor/Editor.h
 )
@@ -45,6 +45,7 @@ set(PROJECT_SOURCES
     source/main.cpp
 
     source/PotatoApp.cpp
+    source/PotatoAppSample.cpp
     source/Editor/Editor.cpp
 )
 
@@ -90,8 +91,9 @@ foreach        (_LIB ${CONAN_LIBS_RELEASE})
   list         (APPEND PROJECT_LIBRARIES optimized ${_LIB})
 endforeach     ()
 
-find_package(Vulkan REQUIRED)
-include_directories(${Vulkan_INCLUDE_DIRS})
+#TODO: ERASE, temp test
+#find_package(Vulkan REQUIRED)
+#include_directories(${Vulkan_INCLUDE_DIRS})
 
 ##################################################    Targets     ##################################################
 add_executable(${PROJECT_NAME} ${PROJECT_FILES})
@@ -101,7 +103,9 @@ target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
   $<INSTALL_INTERFACE:include> PRIVATE source)
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_INCLUDE_DIRS})
-target_link_libraries     (${PROJECT_NAME} PUBLIC ${PROJECT_LIBRARIES} ${CMAKE_DL_LIBS} ${Vulkan_LIBRARIES})
+#TODO: ERASE, temp test
+#target_link_libraries     (${PROJECT_NAME} PUBLIC ${PROJECT_LIBRARIES} ${CMAKE_DL_LIBS} ${Vulkan_LIBRARIES})
+target_link_libraries     (${PROJECT_NAME} PUBLIC ${PROJECT_LIBRARIES} ${CMAKE_DL_LIBS})
 target_compile_definitions(${PROJECT_NAME} PUBLIC ${PROJECT_COMPILE_DEFINITIONS})
 set_target_properties     (${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 

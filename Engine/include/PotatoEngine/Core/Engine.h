@@ -7,20 +7,23 @@
 namespace potato
 {
 	class PluginManager;
+	class WindowManager;
 
 	class POTATOENGINE_EXPORT Engine
 	{
 	public:
 		
-		void init();
 		void init(const nlohmann::json& configJson);
 		void shutdown();
 
 		void update();
 
-		PluginManager* getPluginManager() { return m_pluginManager; }
+		PluginManager* getPluginManager() const { return m_pluginManager; }
+		WindowManager* getWindowManager() const { return m_windowManager; }
 
 	private:
+
 		PluginManager* m_pluginManager = nullptr;
+		WindowManager* m_windowManager = nullptr;
 	};
 }

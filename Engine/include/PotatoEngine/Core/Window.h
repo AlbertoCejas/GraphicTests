@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 struct GLFWwindow;
 
 namespace potato
@@ -10,12 +12,19 @@ namespace potato
 	{
 		public:
 
+			struct Size
+			{
+				int width;
+				int height;
+			};
+
 			~Window();
 
-			const char* getTitle() const;
+			const char* getTitle() const { return m_title.c_str(); }
 
 			int getWidth() const;
 			int getHeight() const;
+			Size getSize() const;
 
 			NativeWindow* getNativeWindow() const { return m_window; }
 
@@ -23,9 +32,11 @@ namespace potato
 
 			friend class WindowManager;
 
-			explicit Window(GLFWwindow& window);
+			explicit Window(const char* title, GLFWwindow& window, bool isPrimary = false);
 
-			GLFWwindow* m_window;
+			std::string m_title = nullptr;
+			GLFWwindow* m_window = nullptr;
+			bool m_isPrimary = false;
 	};
 	
 }

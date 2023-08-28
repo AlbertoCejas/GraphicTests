@@ -1,7 +1,7 @@
 #pragma once
 
 #include <PotatoEngine/Core/Application.h>
-#include <vulkan/vulkan_core.h>
+/*#include <vulkan/vulkan_core.h>
 #include <optional>
 
 struct GLFWwindow;
@@ -23,7 +23,7 @@ struct SwapChainSupportDetails
 	std::vector<VkSurfaceFormatKHR> formats;
 	std::vector<VkPresentModeKHR> presentModes;
 };
-
+*/
 class PotatoApp final : public potato::Application
 {
 	public:
@@ -38,7 +38,7 @@ class PotatoApp final : public potato::Application
 		void initImpl(const nlohmann::json& configJson) final;
 		void updateImpl() final;
 
-		void initWindow();
+		/*void initWindow();
 		void initVulkan();
 		void createSurface();
 		void createInstance();
@@ -156,5 +156,5 @@ class PotatoApp final : public potato::Application
 
 		VkDebugUtilsMessengerEXT m_debugMessenger;
 
-		GLFWwindow* m_window;
+		GLFWwindow* m_window;*/
 };

@@ -4,22 +4,25 @@
 
 namespace potato
 {
-	class IRenderDevice;
-	class IRenderContext;
-	class ISwapChain;
 	class Window;
 
-	struct VKCreateInfo;
 	struct SwapChainDesc;
 
 	namespace vk
 	{
+		struct VKCreateInfo;
+
+		class VKRenderDevice;
+		class VKRenderContext;
+		class VKSwapChain;
+
 		class VKIFactory : public IGPUDriverFactory
 		{
 			public:
 				
-				virtual void init(VKCreateInfo& createInfo) = 0;
-				virtual void createSwapchain(IRenderDevice& renderDevice, IRenderContext& context, const SwapChainDesc& swapChainDesc, Window& window, ISwapChain* swapChain) = 0;
+				virtual VKRenderDevice* createRenderDevice(VKCreateInfo& createInfo) = 0;
+				virtual VKRenderContext* createRenderContexts(VKRenderDevice& renderDevice) = 0;
+				virtual VKSwapChain* createSwapchain(VKRenderDevice& renderDevice, VKRenderContext& context, const SwapChainDesc& swapChainDesc, Window& window) = 0;
 		};
 	}
 }

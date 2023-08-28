@@ -59,39 +59,61 @@ endif()
 set(PROJECT_HEADERS 
     include/${PROJECT_NAME}/Core/Types.h
 
+    include/${PROJECT_NAME}/Core/interface/VKICommandQueue.h
     include/${PROJECT_NAME}/Core/interface/VKIFactory.h
+    include/${PROJECT_NAME}/Core/interface/VKIFence.h
     include/${PROJECT_NAME}/Core/interface/VKIRenderDevice.h
     include/${PROJECT_NAME}/Core/interface/VKIRenderContext.h
+    include/${PROJECT_NAME}/Core/interface/VKIRenderPass.h
+    include/${PROJECT_NAME}/Core/interface/VKIShader.h
+    include/${PROJECT_NAME}/Core/interface/VKIPipelineState.h
     include/${PROJECT_NAME}/Core/interface/VKISwapChain.h
 
+    include/${PROJECT_NAME}/Core/include/Utils/VKConversions.h
+    include/${PROJECT_NAME}/Core/include/VKCommandBuffer.h
+    include/${PROJECT_NAME}/Core/include/VKCommandBufferPool.h
+    include/${PROJECT_NAME}/Core/include/VKCommandQueue.h
     include/${PROJECT_NAME}/Core/include/VKFactory.h
+    include/${PROJECT_NAME}/Core/include/VKFence.h
+    include/${PROJECT_NAME}/Core/include/VKFencePool.h
+    include/${PROJECT_NAME}/Core/include/VKInstance.h
+    include/${PROJECT_NAME}/Core/include/VKLogicalDevice.h
+    include/${PROJECT_NAME}/Core/include/VKObjectWrapper.h
+    include/${PROJECT_NAME}/Core/include/VKPipelineState.h
+    include/${PROJECT_NAME}/Core/include/VKPhysicalDevice.h
     include/${PROJECT_NAME}/Core/include/VKRenderDevice.h
     include/${PROJECT_NAME}/Core/include/VKRenderContext.h
+    include/${PROJECT_NAME}/Core/include/VKRenderPass.h
+    include/${PROJECT_NAME}/Core/include/VKShader.h
+    include/${PROJECT_NAME}/Core/include/VKShaderResourceLayout.h
     include/${PROJECT_NAME}/Core/include/VKSwapChain.h
+
+    include/${PROJECT_NAME}/Debug/VKDebug.h
 )
 
 set(PROJECT_SOURCES 
     source/VKRendererPlugin.cpp
 
+    source/Core/Utils/VKConversions.cpp
+    source/Core/VKCommandBuffer.cpp
+    source/Core/VKCommandBufferPool.cpp
+    source/Core/VKCommandQueue.cpp
     source/Core/VKFactory.cpp
+    source/Core/VKFence.cpp
+    source/Core/VKFencePool.cpp
+    source/Core/VKInstance.cpp
+    source/Core/VKLogicalDevice.cpp
+    source/Core/VKPipelineState.cpp
+    source/Core/VKPhysicalDevice.cpp
     source/Core/VKRenderDevice.cpp
     source/Core/VKRenderContext.cpp
+    source/Core/VKRenderPass.cpp
+    source/Core/VKShader.cpp
+    source/Core/VKShaderResourceLayout.cpp
     source/Core/VKSwapChain.cpp
+
+    source/Debug/VKDebug.cpp
 )
-
-# if(PLATFORM_WIN32)
-#   list(APPEND PROJECT_HEADERS
-#     include/${PROJECT_NAME}/File/Windows/WindowsFileSystem.h
-#     include/${PROJECT_NAME}/File/Windows/WindowsFile.h
-#   )
-# elseif(PLATFORM_LINUX)
-#   list(APPEND PROJECT_HEADERS
-#     include/${PROJECT_NAME}/File/Linux/LinuxFileSystem.h
-#     include/${PROJECT_NAME}/File/Linux/LinuxFile.h
-#   )
-# endif()
-
-
 
 file(GLOB_RECURSE PROJECT_CMAKE_UTILS cmake/*.cmake)
 file(GLOB_RECURSE PROJECT_MISC *.md *.txt)
@@ -158,7 +180,6 @@ target_include_directories(${PROJECT_NAME}
     source)
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_INCLUDE_DIRS})
 target_link_libraries     (${PROJECT_NAME} PUBLIC ${PROJECT_LIBRARIES} ${CMAKE_DL_LIBS} ${Vulkan_LIBRARIES})
-target_link_libraries     (${PROJECT_NAME} PUBLIC ${PROJECT_LIBRARIES})
 target_compile_definitions(${PROJECT_NAME} PUBLIC ${PROJECT_COMPILE_DEFINITIONS})
 set_target_properties     (${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 

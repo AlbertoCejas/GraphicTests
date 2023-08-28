@@ -1,5 +1,5 @@
 #include <PotatoApp/PotatoApp.h>
-
+/*
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
@@ -34,6 +34,9 @@ const std::string MODEL_PATH = "../../Data/models/viking_room.obj";
 const std::string TEXTURE_PATH = "../../Data/textures/viking_room.png";
 
 const int MAX_FRAMES_IN_FLIGHT = 3;
+
+#include <stdio.h>
+
 
 struct UniformBufferObject
 {
@@ -150,14 +153,17 @@ static void framebufferResizeCallback(GLFWwindow* window, int width, int height)
     auto app = reinterpret_cast<PotatoApp*>(glfwGetWindowUserPointer(window));
     framebufferResized = true;
 }
-
+*/
+// Init entry point
 void PotatoApp::initImpl(const nlohmann::json& configJson)
 {
+    /*
     initWindow();
     initVulkan();
+    */
 }
 
-
+/*
 void PotatoApp::initWindow()
 {
     glfwInit();
@@ -1887,9 +1893,10 @@ void PotatoApp::createColorResources()
         m_colorImage, m_colorImageMemory);
     m_colorImageView = createImageView(m_colorImage, colorFormat, VK_IMAGE_ASPECT_COLOR_BIT, 1);
 }
-
+*/
 void PotatoApp::shutdown()
 {
+    /*
     vkDeviceWaitIdle(m_logicalDevice);
 
     cleanupSwapChain();
@@ -1927,12 +1934,13 @@ void PotatoApp::shutdown()
     vkDestroyInstance(m_instance, nullptr);
     glfwDestroyWindow(m_window);
     glfwTerminate();
-
+    */
     Application::shutdown();
 }
 
 void PotatoApp::updateImpl()
 {
+    /*
     if (glfwWindowShouldClose(m_window))
     {
         m_exit = true;
@@ -1940,4 +1948,5 @@ void PotatoApp::updateImpl()
 
     glfwPollEvents();
     drawFrame();
+    */
 }

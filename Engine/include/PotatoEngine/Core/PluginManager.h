@@ -7,6 +7,7 @@
 namespace potato
 {
 	class Plugin;
+	class Engine;
 
 	struct POTATOENGINE_EXPORT PluginPriorityComparator
 	{
@@ -17,8 +18,9 @@ namespace potato
 	{
 	public:
 
-		void init();
-		void init(const nlohmann::json& configJson);
+		explicit PluginManager(Engine& engine);
+
+		void init(const nlohmann::json& appJson, const nlohmann::json& engineJson, const nlohmann::json& pluginsJson);
 		void shutdown();
 
 		Plugin* loadPlugin(const char* pluginPath);
@@ -28,6 +30,7 @@ namespace potato
 
 	private:
 
+		Engine& m_engine;
 		SortedVector<Plugin*, PluginPriorityComparator> m_activePlugins;
 	};
 }

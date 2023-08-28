@@ -1,10 +1,11 @@
-#include <PotatoApp/PotatoApp.h>
+#include <PotatoApp/PotatoAppSample.h>
+
 #include <iostream>
 
 
 int main(int argc, char** argv)
 {
-	PotatoApp app("PotatoApp");
+	PotatoAppSample app("PotatoApp");
 
 	app.init();
 

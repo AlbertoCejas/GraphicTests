@@ -65,6 +65,7 @@ set(PROJECT_HEADERS
     include/${PROJECT_NAME}/Core/Engine.h
     include/${PROJECT_NAME}/Core/PluginManager.h
     include/${PROJECT_NAME}/Core/Plugin.h
+    include/${PROJECT_NAME}/Core/RendererPlugin.h
     include/${PROJECT_NAME}/Core/SharedLibrary.h
     include/${PROJECT_NAME}/Core/WindowManager.h
     include/${PROJECT_NAME}/Core/Window.h
@@ -78,17 +79,28 @@ set(PROJECT_HEADERS
     include/${PROJECT_NAME}/Util/Macros.h
 
     include/${PROJECT_NAME}/Render/interface/IGPUDriverFactory.h
+    include/${PROJECT_NAME}/Render/interface/IFence.h
+    include/${PROJECT_NAME}/Render/interface/IPipelineState.h
     include/${PROJECT_NAME}/Render/interface/IRenderDevice.h
     include/${PROJECT_NAME}/Render/interface/IRenderContext.h
+    include/${PROJECT_NAME}/Render/interface/IRenderPass.h
+    include/${PROJECT_NAME}/Render/interface/IShader.h
     include/${PROJECT_NAME}/Render/interface/ISwapChain.h
 
+    include/${PROJECT_NAME}/Render/include/BaseDeviceObject.h
+    include/${PROJECT_NAME}/Render/include/BaseFence.h
     include/${PROJECT_NAME}/Render/include/BaseGPUDriverFactory.h
+    include/${PROJECT_NAME}/Render/include/BasePipelineState.h
     include/${PROJECT_NAME}/Render/include/BaseRenderDevice.h
-    include/${PROJECT_NAME}/Render/include/BaseRenderDeviceLegacy.h
+    include/${PROJECT_NAME}/Render/include/BaseRenderDeviceModern.h
     include/${PROJECT_NAME}/Render/include/BaseRenderContext.h
-    include/${PROJECT_NAME}/Render/include/BaseRenderContextLegacy.h
+    include/${PROJECT_NAME}/Render/include/BaseRenderContextModern.h
+    include/${PROJECT_NAME}/Render/include/BaseRenderPass.h
+    include/${PROJECT_NAME}/Render/include/BaseShader.h
     include/${PROJECT_NAME}/Render/include/BaseSwapChain.h
+    include/${PROJECT_NAME}/Render/include/GraphicsAccessories.h
     include/${PROJECT_NAME}/Render/include/GraphicsTypes.h
+    include/${PROJECT_NAME}/Render/include/InputLayout.h
 )
 
 set(PROJECT_SOURCES 

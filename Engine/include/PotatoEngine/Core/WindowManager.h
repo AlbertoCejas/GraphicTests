@@ -17,7 +17,10 @@ namespace potato
 
 			void destroyAll();
 
+			Window* getPrimaryWindow() const;
 			const std::list<Window*> getWindows() const { return m_windows; }
+
+			void setPrimaryWindow(Window& window);
 
 		private:
 

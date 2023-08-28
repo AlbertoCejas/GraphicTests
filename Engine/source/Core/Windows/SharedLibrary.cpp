@@ -1,10 +1,6 @@
-#define WIN32_LEAN_AND_MEAN
-#define VC_EXTRALEAN
-#include <windows.h>
 #include <filesystem>
 
 #include "Core/SharedLibrary.h"
-#include "Util/Assert.h"
 
 namespace potato
 {
@@ -28,12 +24,5 @@ namespace potato
     {
         bool result = ::FreeLibrary(static_cast<HMODULE>(sharedLibraryHandle));
         POTATO_ASSERT_MSG(result == true, "DLL '%s' couldn't be unloaded", path);
-    }
-
-    void* SharedLibrary::getFunctionPtr(void* sharedLibraryHandle, const char* functionName)
-    {
-        FARPROC functionAddress = ::GetProcAddress(static_cast<HMODULE>(sharedLibraryHandle), functionName);
-        POTATO_ASSERT_MSG(functionAddress != nullptr, "Could not find function '%s' in DLL", functionName);
-        return functionAddress;
     }
 }

@@ -20,9 +20,13 @@ namespace potato
 	{
 		nlohmann::json config = parseConfig(configFilePath);
 
+		
+		const auto& appJson = config["app"];
+		POTATO_ASSERT_MSG(appJson.is_discarded() == false, "Config file doesn't contain 'app' section");
+
 		// Set application name
-		const auto& appNameJson = config["name"];
-		POTATO_ASSERT_MSG(appNameJson.is_discarded() == false, "Config file doesn't contain app name field");
+		const auto& appNameJson = appJson["name"];
+		POTATO_ASSERT_MSG(appNameJson.is_discarded() == false, "Config file doesn't contain app 'name' field");
 		m_name = appNameJson.get<std::string>();
 
 		m_engine.init(config);
@@ -53,7 +57,7 @@ namespace potato
 
 		//nlohmann::json configJson = nlohmann::json::parse(configFileStr);
 
-		nlohmann::json configJson = nlohmann::json::parse(configFile->getCFile(), nullptr, false);
+		const nlohmann::json configJson = nlohmann::json::parse(configFile->getCFile(), nullptr, false);
 		POTATO_ASSERT_MSG(configJson.is_discarded() == false, "Config file has invalid Json syntax");
 		return configJson;
 	}

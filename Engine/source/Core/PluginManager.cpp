@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <nlohmann/json.hpp>
 
+#include "Core/Engine.h"
 #include "Core/Plugin.h"
 #include "Core/SharedLibrary.h"
 #include "Util/Assert.h"
@@ -14,17 +15,14 @@ namespace potato
 		return lhs->getPriority() < rhs->getPriority();
 	}
 
-	void PluginManager::init()
-	{
+	PluginManager::PluginManager(Engine& engine) : m_engine(engine) {}
 
-	}
-
-	void PluginManager::init(const nlohmann::json& configJson)
+	void PluginManager::init(const nlohmann::json& appJson, const nlohmann::json& engineJson, const nlohmann::json& pluginsJson)
 	{
 		std::vector<const nlohmann::json*> pluginConfigs;
-		pluginConfigs.reserve(configJson.size());
+		pluginConfigs.reserve(pluginsJson.size());
 
-		for (const auto& pluginJson : configJson)
+		for (const auto& pluginJson : pluginsJson)
 		{
 			const auto& pluginNameJson = pluginJson["name"];
 			POTATO_ASSERT_MSG(pluginNameJson.is_discarded() == false, "Plugins must have a name.");
@@ -46,7 +44,7 @@ namespace potato
 
 		for (size_t i = 0; i < m_activePlugins.size(); i++)
 		{
-			m_activePlugins[i]->init(*pluginConfigs[i]);
+			m_activePlugins[i]->init(appJson, engineJson, *pluginConfigs[i]);
 		}
 	}
 
@@ -69,13 +67,13 @@ namespace potato
 		void* sharedLibHandle = SharedLibrary::load(pluginPath);
 
 		// Get plugin name and accessor function
-		using CreatePluginFunctionSignature = Plugin& (*)();
+		using CreatePluginFunctionSignature = Plugin& (*)(Engine&);
 		using GetPluginNameFunctionSignature = const char* (*)();
 
 		static constexpr const char CREATE_FUNCTION_PREFIX[] = "createPlugin";
 		static constexpr const char GET_NAME_FUNCTION_NAME[] = "getPluginName";
 
-		GetPluginNameFunctionSignature getPluginNameFunction = reinterpret_cast<GetPluginNameFunctionSignature>(SharedLibrary::getFunctionPtr(sharedLibHandle, GET_NAME_FUNCTION_NAME));
+		GetPluginNameFunctionSignature getPluginNameFunction = SharedLibrary::getFunctionPtr<GetPluginNameFunctionSignature>(sharedLibHandle, GET_NAME_FUNCTION_NAME);
 		const std::string pluginName = getPluginNameFunction();
 
 		// Make sure it isn't duplicated
@@ -90,8 +88,8 @@ namespace potato
 
 		// Create and register plugin into PluginManager
 		const std::string createFunctionName = CREATE_FUNCTION_PREFIX + pluginName;
-		CreatePluginFunctionSignature createPluginFunction = reinterpret_cast<CreatePluginFunctionSignature>(SharedLibrary::getFunctionPtr(sharedLibHandle, createFunctionName.c_str()));
-		pluginPtr = &(createPluginFunction());
+		CreatePluginFunctionSignature createPluginFunction = SharedLibrary::getFunctionPtr<CreatePluginFunctionSignature>(sharedLibHandle, createFunctionName.c_str());
+		pluginPtr = &(createPluginFunction(m_engine));
 		POTATO_ASSERT_MSG(pluginPtr != nullptr, "Plugin '%' was not properly created", pluginName.c_str());
 		m_activePlugins.push(pluginPtr);
 		

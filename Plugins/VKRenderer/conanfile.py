@@ -9,7 +9,8 @@ class Project(ConanFile):
     url             = "https://github.com/AlbertoCejas/PotatoEngine"
     settings        = "arch", "build_type", "compiler", "os"
     generators      = "cmake"
-    requires        = (("nlohmann_json/3.9.1"))
+    requires        = (("nlohmann_json/3.9.1"),
+                       ("glfw/3.3.6"))
     options         = {"shared": [True]} 
     default_options = {"shared" : True}
 

@@ -18,18 +18,17 @@ Window* WindowManager::createWindow(const char* title, int width, int height)
 		return nullptr;
 	}
 
-	Window* window = new Window(*glfwWindow);
-
+	Window* window = new Window(title, *glfwWindow);
 	m_windows.push_back(window);
+
+	return window;
 }
 
 void WindowManager::destroyWindow(Window& window)
 {
-	POTATO_ASSERT_MSG(window.m_window != nullptr, "Attempting to destroy a null window");
-
 	m_windows.remove(&window);
 
-	glfwDestroyWindow(window.m_window);
+	delete &window;
 }
 
 void WindowManager::destroyAll()
@@ -41,4 +40,28 @@ void WindowManager::destroyAll()
 	}
 
 	m_windows.clear();
+}
+
+Window* WindowManager::getPrimaryWindow() const
+{
+	for (Window* window : m_windows)
+	{
+		if (window->m_isPrimary)
+		{
+			return window;
+		}
+	}
+	return nullptr;
+}
+
+void WindowManager::setPrimaryWindow(Window& newPrimaryWindow)
+{
+	for (Window* window : m_windows)
+	{
+		if (window != &newPrimaryWindow)
+		{
+			window->m_isPrimary = false;
+		}
+	}
+	newPrimaryWindow.m_isPrimary = true;
 }
